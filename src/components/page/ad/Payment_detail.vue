@@ -3,7 +3,7 @@
         <!-- 顶部信息 -->
         <div class="frame_head">
             <div class="head_top">
-                <img src="../../../../static/img/u3720.png" class="left">
+                <img src="../../../../static/img/u3733.png" class="left">
                 <div>
                     <div class="data">
                         <p>交易金额</p>
@@ -64,7 +64,8 @@ export default {
 
 <style lang="less" scoped>
 .frame_head{
-    background: url('../../../../static/img/u3761.png');
+    background: url('../../../../static/img/u3873.png');
+    background-size: cover;
     .head_bottom{
         text-align: center;
         span{

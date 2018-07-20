@@ -51,6 +51,7 @@ export default {
 <style lang="less" scoped>
 .frame_head{
     background: url('../../../../static/img/u3761.png');
+    background-size: cover;
 }
 </style>
 

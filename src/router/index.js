@@ -36,6 +36,10 @@ export default new Router({
     {
       path: '/ad/daily/all',
       component: resolve => require(['../components/page/ad/Payment_all.vue'], resolve)
+    },
+    {
+      path: '/ad/daily/detail',
+      component: resolve => require(['../components/page/ad/Payment_detail.vue'], resolve)
     }
   ]
 })

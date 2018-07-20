@@ -1,6 +1,6 @@
 <template>
     <ul class="Lklist">
-        <li @click="goDetail()">
+        <li @click="goDetail('earn')">
             <!-- 左边图标 -->
             <div class="left icon">
                 <img :src="type=='earn'?'../../../static/img/u3770.png':'../../../static/img/u3883.png' ">
@@ -20,7 +20,7 @@
             <!-- 右边箭头 -->
             <img src="../../../static/img/u3771.png" class="arrow">
         </li>
-        <li>
+        <li @click="goDetail('pay')">
             <!-- 左边图标 -->
             <div class="left icon">
                 <img :src="type=='earn'?'../../../static/img/u3770.png':'../../../static/img/u3883.png' ">
@@ -233,8 +233,12 @@ export default {
     props: ['type'],
     methods:{
         // 查看详情
-        goDetail(){
-            this.$router.push('/earning/daily/detail');
+        goDetail(type){
+            if(type == 'earn'){
+                this.$router.push('/earning/daily/detail');
+            }else if(type == 'pay'){
+                this.$router.push('/ad/daily/detail');
+            }
         },
 
 
