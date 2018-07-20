@@ -1,0 +1,109 @@
+// 通用样式
+.left{
+    float: left;
+}
+.right{
+    float: right;
+}
+
+.frame_head{
+    height: 2.76rem;
+    width: 100%;
+    .head_top{
+        height: 2.76rem;
+        img{
+            width: 0.64rem;
+            height: 0.64rem;
+            margin: 0.25rem 0.2rem 0;
+        }
+        .data{
+            float: left;
+            height: 0.49rem;
+            line-height: 0.49rem;
+            width: 3rem;
+            margin: 0.5rem auto;
+            color: #ffffff;
+            text-align: center;
+            :first-child{
+                font-size: 0.26rem;
+            }
+            :last-child{
+                font-size: 0.6rem;
+            }
+        }
+        :nth-child(2){
+            width: 3rem;
+            margin: 0 auto;
+        }
+    }
+    .head_bottom{
+        position: absolute;
+        top: 1.75rem;
+        height: 0.8rem;
+        width: 100%;
+        border-top: 0.011rem solid #fff;
+        border-bottom: 0.011rem solid #fff;
+        color: #fff;
+        font-weight: 650;
+        .hyaline{
+            height: 100%;
+            width: 100%;
+            background-color: #ccc;
+            opacity: 0.4;
+        }
+        span{
+            margin: -0.58rem 0.4rem 0;
+            font-size: 0.28rem;
+        }
+    }
+}
+.frame_footer{
+    height: 1rem;
+    line-height: 1rem;
+    font-size: 0.32rem;
+    color: #A1A1A1;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    text-align: center;
+    border-top: 0.01rem solid #BCBCBC;
+    div{
+        flex: 1;
+        &:first-child{
+            border-right: 0.01rem solid #BCBCBC;
+        }
+    }
+}
+.frame_panel{
+    width: 90%;
+    margin: 0.5rem auto 0;
+    background-color: #F2F2F2;
+    border-radius: 0.3rem;
+    border: 0.02rem solid #E4E4E4;
+    padding: 0.25rem;
+    font-size: 0.3rem;
+    .each_row{
+        margin: 0 auto; 
+        overflow: hidden;
+        display: flex; 
+        margin-bottom: 0.2rem;
+        .each_row_left{ 
+            text-align: center;
+            float: left; 
+            flex: 1; 
+            padding-bottom: 100rem;
+            margin-bottom: -100rem;
+        }
+        .each_row_right{ 
+            float: left; 
+            flex: 3; 
+            padding-bottom: 100rem;
+            margin-bottom: -100rem;
+        }
+    }
+    :last-child{
+        margin-bottom: 0;
+    }
+}

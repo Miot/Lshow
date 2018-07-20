@@ -3,10 +3,10 @@
         <!-- 顶部 -->
         <div class="pw_head">
             <div class="head_left">
-                <img src="../../../../static/img/u3758.png" class="avatar">
+                <img :src="userInfo.headImg" class="avatar">
                 <div class="user">
-                    <p style="font-size:0.35rem">Linker.林小七</p>
-                    <p style="font-size:0.25rem">No.100101</p>
+                    <p style="font-size:0.35rem">Linker.{{userInfo.nickName}}</p>
+                    <p style="font-size:0.25rem">No.{{userInfo.linkerNo}}</p>
                 </div>
             </div>
             <div class="head_right">
@@ -23,15 +23,15 @@
             <div class="pb_top">
                 <ul>
                     <li>
-                        <p>82.23</p>
+                        <p>{{accData.accTodayIn}}</p>
                         今日收益
                     </li>
                      <li>
-                         <p>2310.20</p>
+                         <p>{{accData.accTotalIn}}</p>
                          累计收益
                      </li>
                      <li>
-                         <p>82.23</p>
+                         <p>{{accData.accBlance}}</p>
                          账户余额
                      </li>
                      <div class="arrow"></div>
@@ -43,15 +43,15 @@
                  <img src="../../../../static/img/u3722.png" width="80%" style="margin:0 auto">
                  <ul>
                      <li>
-                         <p>82.23</p>
+                         <p>{{adaccData.adaccTodayOut}}</p>
                          今日支出
                      </li>
                      <li>
-                         <p>2310.20</p>
+                         <p>{{adaccData.adaccTotalOut}}</p>
                          累计支出
                      </li>
                      <li>
-                         <p>2310.20</p>
+                         <p>{{adaccData.adaccBlance}}</p>
                          账户余额
                      </li>
                      <div class="arrow"></div>
@@ -82,6 +82,7 @@
                          我的推荐
                      </li>
                 </ul>
+                <a href="javascript:;" class="weui_btn_primary"></a>
             </div>
             <!-- 底部 -->
             <img class="pb_footer" src="../../../../static/img/u3752.png">
@@ -92,7 +93,25 @@
 export default {
     data(){
         return {
-            msg: 'Welcome'
+            // 用户信息
+            userInfo:{
+                nickName:'',
+                linkerNo:'',
+                // headImg:'../../../../static/img/u3758.png',
+                headImg:'',
+            },
+            // 收益信息
+            accData:{
+                accTodayIn:0,
+                accTotalIn:0,
+                accBlance:0,
+            },
+            // 支出信息
+            adaccData:{
+                adaccTodayOut:0,
+                adaccTotalOut:0,
+                adaccBlance:0,
+            }
         }
     },
     methods:{
@@ -104,9 +123,30 @@ export default {
         gotoAD(){
             this.$router.push('/ad/daily');
         },
+        // 获取用户信息
+        getAccount(){
+            let _this = this;
+            this.LKshow.api.account.getAccount({
+                success:function(data){
+                    _this.userInfo.nickName = data.nickName;
+                    _this.userInfo.linkerNo = data.linkerNo;
+                    _this.userInfo.headImg = data.headImg;
+                    _this.accData.accTodayIn = data.accTodayIn;
+                    _this.accData.accTotalIn = data.accTotalIn;
+                    _this.accData.accBlance = data.accBlance;
+                    _this.adaccData.adaccTodayOut = data.adaccTodayOut;
+                    _this.adaccData.adaccTotalOut = data.adaccTotalOut;
+                    _this.adaccData.adaccBlance = data.adaccBlance;
+                },
+                fail:function(err){
+                    console.log('获取用户信息出错',err);
+                }
+            })
+        }
     },
     mounted(){
         window.flex(true);
+        this.getAccount();
     },
 }
 </script>
@@ -124,6 +164,8 @@ export default {
             float: left;
             width: 0.96rem;
             height: 0.96rem;
+            border-radius: 0.25rem;
+            border:0.02rem solid #ffffff;
         }
         .user{
             display: inline-block;
@@ -259,7 +301,7 @@ export default {
     }
     .pb_footer{
         width: 100%;
-        max-height: 2.8rem;
+        max-height: 2.2rem;
         position: absolute;
         bottom: 0;
         left: 0;
