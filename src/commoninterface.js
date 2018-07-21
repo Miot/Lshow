@@ -1,22 +1,28 @@
-// import router from './router'
-
 export default function install (Vue, options){
     /**
      * 服务器端api地址合集
      */
     let apiurls={
+        // 登录
+        login:'/Api/login',
         api:{
             account:{
                 // 获取当前登陆的账号信息
                 getAccount:'/api/account/getAccount',
-                // 登录
-                // Login:'/Common/Session/Login',
             },
         }
     }
   
     //具体接口资料详见接口文档
     Vue.prototype.LKshow={
+        login:function(args){
+            Vue.prototype.request({
+                url:apiurls.login,
+                params:args.data,
+                success:args.success,
+                fail:args.fail
+            });
+        },
         api:{
             account:{
                 // 获取
@@ -29,7 +35,7 @@ export default function install (Vue, options){
                     });
                 },
             },
-        }
+        },
     };
 
   
@@ -51,7 +57,7 @@ export default function install (Vue, options){
         let fail = args.fail || function(){};
 
         //自动添加headers
-        // let headers = args.headers || {};
+        let headers = args.headers || {};
         //检查是否存在SessionKey
         // let sessionkey = sessionStorage.getItem('SessionKey');
         // if (sessionkey!='' && sessionkey!=null){
@@ -66,7 +72,7 @@ export default function install (Vue, options){
         this.baserequest({
             url: args.url,
             method: args.method,
-            // headers:headers,
+            headers:headers,
             data: args.data,
             params: args.params,
             success:function(response){
@@ -137,7 +143,7 @@ export default function install (Vue, options){
         if(!args){throw new Error('参数不能为空'); }
         let method = args.method || 'post'
         if(method!='post') method='get';
-        // let headers = args.headers || {};
+        let headers = args.headers || {};
         let data = args.data || {};
         let success = args.success || function(){};
         let fail = args.fail || function(){};
@@ -150,7 +156,7 @@ export default function install (Vue, options){
             // `method` 是创建请求时使用的方法
             method: method, // 默认是 get
             // `headers` 是即将被发送的自定义请求头
-            // headers:headers,
+            headers:headers,
             // `data` 是作为请求主体被发送的数据
             // 只适用于这些请求方法 'PUT', 'POST', 和 'PATCH'
             // 在没有设置 `transformRequest` 时，必须是以下类型之一：

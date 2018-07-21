@@ -7,7 +7,11 @@ export default new Router({
   routes: [
     {
       path: '/',
-      redirect: '/personcenter'
+      redirect: '/login'
+    },
+    {
+      path: '/login',
+      component: resolve => require(['../components/page/person/Login.vue'], resolve)
     },
     {
       path: '/personcenter',
@@ -40,6 +44,6 @@ export default new Router({
     {
       path: '/ad/daily/detail',
       component: resolve => require(['../components/page/ad/Payment_detail.vue'], resolve)
-    }
+    },
   ]
 })

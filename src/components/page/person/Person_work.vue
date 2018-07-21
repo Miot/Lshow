@@ -142,6 +142,11 @@ export default {
                     console.log('获取用户信息出错',err);
                 }
             })
+        },
+
+
+        goTest(){
+            this.$router.push('/personcenter/test');
         }
     },
     mounted(){
@@ -301,7 +306,7 @@ export default {
     }
     .pb_footer{
         width: 100%;
-        max-height: 2.2rem;
+        max-height: 2rem;
         position: absolute;
         bottom: 0;
         left: 0;

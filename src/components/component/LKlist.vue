@@ -220,15 +220,10 @@
             <!-- 右边箭头 -->
             <img src="../../../static/img/u3771.png" class="arrow">
         </li>
-
     </ul>
 </template>
 
 <script>
-import Vue from 'vue'
-import VueScroller from 'vue-scroller'
-Vue.use(VueScroller)
-
 export default {
     props: ['type'],
     methods:{
@@ -240,38 +235,6 @@ export default {
                 this.$router.push('/ad/daily/detail');
             }
         },
-
-
-
-        infinite(done) {
-        if(this.noData) {
-            setTimeout(()=>{
-            this.$refs.myscroller.finishInfinite(2);
-            })
-            return;
-            }
-            let self = this;//this指向问题
-            let start = this.moveList.length;
-
-            setTimeout(() => {
-            for(let i = start + 1; i < start + 10; i++) {
-            self.moveList.push(i)
-            }
-            if(start > 30) {
-            self.noData = "没有更多数据"
-            }
-            self.$refs.myscroller.resize();
-            done()
-            }, 1500)
-        },
-
-        //done()表示这次异步加载数据完成，加载下一次
-        //因为这个是同步的，加了setTimeout就是异步加载数据；
-        //因为涉及到this指向问题，所以将他放在一个变量里。
-        refresh() {
-            console.log('refresh')
-        }
-
     }
 }
 </script>
