@@ -5,10 +5,20 @@ export default function install (Vue, options){
     let apiurls={
         // 登录
         login:'/Api/login',
+        // 注销
+        logout:'/Api/logout',
         api:{
             account:{
                 // 获取当前登陆的账号信息
                 getAccount:'/api/account/getAccount',
+                // 获取收益账号流水记录（分页）
+                getInLogs:'/api/account/getInLogs',
+                // 获取收益账号流水记录详细信息
+                getInLog:'/api/account/getInLog',
+                // 获取广告账号流水记录（分页）
+                getOutLogs:'/api/account/getOutLogs',
+                // 获取广告账号流水记录详细信息
+                getOutLog:'/api/account/getOutLog',
             },
         }
     }
@@ -23,13 +33,55 @@ export default function install (Vue, options){
                 fail:args.fail
             });
         },
+        logout:function(args){
+            Vue.prototype.request({
+                url:apiurls.logout,
+                success:args.success,
+                fail:args.fail
+            });
+        },
         api:{
             account:{
-                // 获取
                 getAccount:function(args){
                     Vue.prototype.request({
                         url:apiurls.api.account.getAccount,
                         method:'GET',
+                        success:args.success,
+                        fail:args.fail
+                    });
+                },
+                getInLogs:function(args){
+                    Vue.prototype.request({
+                        url:apiurls.api.account.getInLogs,
+                        method:'GET',
+                        params:args.data,
+                        success:args.success,
+                        fail:args.fail
+                    });
+                },
+                getInLog:function(args){
+                    Vue.prototype.request({
+                        url:apiurls.api.account.getInLog,
+                        method:'GET',
+                        params:{id:args.id},
+                        success:args.success,
+                        fail:args.fail
+                    });
+                },
+                getOutLogs:function(args){
+                    Vue.prototype.request({
+                        url:apiurls.api.account.getOutLogs,
+                        method:'GET',
+                        params:args.data,
+                        success:args.success,
+                        fail:args.fail
+                    });
+                },
+                getOutLog:function(args){
+                    Vue.prototype.request({
+                        url:apiurls.api.account.getOutLog,
+                        method:'GET',
+                        params:{id:args.id},
                         success:args.success,
                         fail:args.fail
                     });

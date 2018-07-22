@@ -1,7 +1,7 @@
 <template>
     <v-loadmore :bottom-method="loadBottom" :bottom-all-loaded="allLoaded" ref="loadmore" :auto-fill="true" class="Lklist">
         <ul>
-            <li v-for="item in testData">
+            <li v-for="item in list">
                 <!-- 左侧图标 -->
                 <div class="left icon">
                     <img :src="type=='earn'?'../../../static/img/u3770.png':'../../../static/img/u3883.png'">
@@ -39,7 +39,9 @@ export default {
         return{
             noMore:false,
             allLoaded: false, //是否可以上拉属性，false可以上拉，true为禁止上拉，就是不让往上划加载数据了
-            testData:[11111111111,222,11,2,6,3,2,4,9,1,444,44444],
+            list:[11111111111,222,11,2,6,3,2,4,9,1,444,44444],
+            pageIndex:1, //第几页
+            opt:0 //手指方向（0-收入 1-支出）
         }
     },
     methods:{
@@ -54,12 +56,32 @@ export default {
 
         // 滚动区域上拉加载更多
         loadBottom(){  
-            let _this = this;
-            this.testData.push("99999999999");
+            this.list.push("99999999999");
             this.allLoaded = true; // 全部数据加载完毕 无法拖动
             this.noMore = true; // 显示没有更多
             this.$refs.loadmore.onBottomLoaded();// 固定方法，查询完要调用一次，用于重新定位  
         },
+
+        // 获取数据
+        getList(){
+            let _this = this;
+            if(this.type == 'earn'){
+                this.LKshow.api.account.getInLogs({
+                    data:{
+                        size:15,
+                        index:_this.pageIndex,
+                    },
+                    success: function(data) {
+                        console.log(data);
+                    },
+                    fail: function(err) {
+                        console.log(err);
+                    }
+                })
+            }else{
+
+            }
+        }
     },
     mounted(){
         window.flex(true)
