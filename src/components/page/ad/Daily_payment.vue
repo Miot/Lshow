@@ -19,7 +19,9 @@
             </div>
         </div>
         <!-- 列表 -->
-        <LKlist :type="type" style="top:2.76rem"></LKlist>
+        <div class="daily_list">
+            <LKlist :type="type"></LKlist>
+        </div>
         <!-- 底部按钮 -->
         <div class="frame_footer">
             <div>余额转出</div>

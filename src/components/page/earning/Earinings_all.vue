@@ -1,6 +1,8 @@
 <template>
-    <div>
-        <LKlist :type="type"></LKlist>
+    <div id="container">
+        <div class="all_list">
+            <LKlist :type="type"></LKlist> 
+        </div>
         <div class="ed_footer">
             <div>收入</div>
             <div>支出</div>
@@ -25,7 +27,6 @@ export default {
 
 <style lang="less" scoped>
 .ed_footer{
-    z-index: 20;
     height: 1rem;
     line-height: 1rem;
     font-size: 0.32rem;
@@ -38,6 +39,7 @@ export default {
     text-align: center;
     border-top: 0.01rem solid #BCBCBC;
     div{
+        background:#fff;
         flex: 1;
         &:first-child{
             border-right: 0.01rem solid #BCBCBC;

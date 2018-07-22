@@ -1,14 +1,27 @@
 // 通用样式
+#container{
+    font-size: 0.26rem;
+    background: #ffffff;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+// 左浮动
 .left{
     float: left;
 }
+// 右浮动
 .right{
     float: right;
 }
-
+// 框架头
 .frame_head{
+    // z-index:10;
+    position: absolute;
     height: 2.76rem;
     width: 100%;
+    top:0;
+    left:0;
     .head_top{
         height: 2.76rem;
         img{
@@ -57,15 +70,17 @@
         }
     }
 }
+// 框架底部按钮
 .frame_footer{
+    // z-index:10;
     height: 1rem;
-    line-height: 1rem;
-    font-size: 0.32rem;
-    color: #A1A1A1;
+    width: 100%;
     position: absolute;
     bottom: 0;
     left: 0;
-    width: 100%;
+    line-height: 1rem;
+    font-size: 0.32rem;
+    color: #A1A1A1;
     display: flex;
     text-align: center;
     border-top: 0.01rem solid #BCBCBC;
@@ -76,6 +91,7 @@
         }
     }
 }
+// 信息盒子
 .frame_panel{
     width: 90%;
     margin: 0.5rem auto 0;
@@ -106,4 +122,19 @@
     :last-child{
         margin-bottom: 0;
     }
+}
+// 列表
+.daily_list{
+    width:100%;
+    overflow-y:scroll;
+    position:absolute;
+    bottom: 1rem;
+    top: 2.76rem;
+}
+.all_list{
+    width:100%;
+    overflow-y:scroll;
+    position:absolute;
+    bottom: 1rem;
+    top: 0;
 }

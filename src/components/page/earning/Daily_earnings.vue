@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div id="container">
         <!-- 顶部信息 -->
         <div class="frame_head">
             <div class="head_top">
@@ -19,10 +19,12 @@
             </div>
         </div>
         <!-- 列表 -->
-        <LKlist :type="type" style="top:2.76rem"></LKlist>
+        <div class="daily_list">
+            <LKlist :type="type"></LKlist>
+        </div>
         <!-- 底部按钮 -->
         <div class="frame_footer">
-            <div>转出为广告金</div>
+            <div style="background:#fff">转出为广告金</div>
             <div style="background:linear-gradient(45deg,rgba(255, 136, 0, 1) 0%,rgba(255, 136, 0, 1) 0%,rgba(255, 0, 0, 1) 100%,rgba(255, 0, 0, 1) 100%);color:#FFFFFF">转出到银行卡</div>
         </div>
     </div>
@@ -53,6 +55,7 @@ export default {
     background: url('../../../../static/img/u3761.png');
     background-size: cover;
 }
+
 </style>
 
 

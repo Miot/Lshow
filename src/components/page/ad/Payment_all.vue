@@ -1,6 +1,8 @@
 <template>
     <div>
-        <LKlist :type="type"></LKlist>
+        <div class="all_list">
+            <LKlist :type="type"></LKlist> 
+        </div>
         <div class="ed_footer">
             <div>收入</div>
             <div>支出</div>
