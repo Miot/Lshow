@@ -42,7 +42,7 @@ export default {
                         _this.$router.push('/personcenter/');
                     },
                     fail:function(err){
-                        console.log('获取用户信息出错');
+                        console.log(err);
                     }
                 })
             }

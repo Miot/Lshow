@@ -94,12 +94,14 @@
 // 信息盒子
 .frame_panel{
     width: 90%;
-    margin: 0.5rem auto 0;
     background-color: #F2F2F2;
     border-radius: 0.3rem;
     border: 0.02rem solid #E4E4E4;
     padding: 0.25rem;
     font-size: 0.3rem;
+    position: absolute;
+    top: 3.5rem;
+    left: 5%;
     .each_row{
         margin: 0 auto; 
         overflow: hidden;
@@ -114,7 +116,7 @@
         }
         .each_row_right{ 
             float: left; 
-            flex: 3; 
+            flex: 2; 
             padding-bottom: 100rem;
             margin-bottom: -100rem;
         }
@@ -124,6 +126,63 @@
     }
 }
 // 列表
+.Lklist {
+    ul{
+        width: 100%;
+        height: 100%;
+        li{
+            float: left;
+            height: 1.2rem;
+            width: 100%;
+            border-bottom: 0.01rem solid #E4E4E4;
+            img{
+                width: 0.64rem;
+                height: 0.64rem;
+                margin: 0.25rem;
+            }
+            .icon{
+                border-right: 0.01rem solid #E4E4E4;
+                margin: auto;
+                .trigon{
+                    width: 0;
+                    height: 0;
+                    border-top: 0.12rem dashed transparent;
+                    border-bottom: 0.12rem dashed transparent;
+                    border-right: 0.12rem solid #E4E4E4;
+                    margin-top: 0.45rem;
+                }
+            }
+            .data{
+                display: flex;
+                margin-right: 0.4rem;
+                div{
+                    margin: 0.2rem 0 0 0.2rem;
+                    height: 0.4rem;
+                    line-height: 0.4rem;
+                }
+            }
+            .arrow{
+                width: 0.16rem;
+                height: 0.28rem;
+                float: right;
+                position: relative;
+                bottom: 0.4rem;
+                margin-right: 0.12rem;
+                margin-bottom: 0.12rem;
+            }
+        }
+    }
+}
+.noMoreMsg{
+    display: inline-block;
+    height: 0.2rem;
+    line-height: 0.2rem;
+    width: 100%;
+    margin: 0.3rem 0;
+    font-size: 0.25rem;
+    text-align: center;
+    color:#424242;
+}
 .daily_list{
     width:100%;
     overflow-y:scroll;

@@ -7,15 +7,15 @@
                 <div>
                     <div class="data">
                         <p>今日收益</p>
-                        <p>250.25</p>
+                        <p>{{accData.accTodayIn}}</p>
                     </div>
                 </div>
                 <img src="../../../../static/img/u3870.png" class="right" @click="goAll">
             </div>
             <div class="head_bottom">
                 <div class="hyaline"></div>
-                <span class="left">累计收益：777.77</span>
-                <span class="right">账户余额：777.77</span>
+                <span class="left">累计收益：{{accData.accTotalIn}}</span>
+                <span class="right">账户余额：{{accData.accBlance}}</span>
             </div>
         </div>
         <!-- 列表 -->
@@ -38,14 +38,40 @@ export default {
     },
     data(){
         return {
-            type:'earn'
+            type:'earn',
+            accData:{
+                accTodayIn:0,
+                accTotalIn:0,
+                accBlance:0,
+            }
         }
     },
     methods:{
         // 跳转到全部收益记录页
         goAll(){
             this.$router.push('/earning/daily/all');
+        },
+        // 获取总栏数据
+        getData(){
+            let _this = this;
+            this.LKshow.api.account.getAccount({
+                success:function(data){
+                    _this.accData.accTodayIn = data.accTodayIn;
+                    _this.accData.accTotalIn = data.accTotalIn;
+                    _this.accData.accBlance = data.accBlance;
+                },
+                fail:function(err){
+                    console.log('获取总栏数据',err);
+                }
+            })
         }
+    },
+    mounted(){
+      this.getData();
+    },
+    beforeRouteLeave(to, from, next) {
+        from.meta.keepAlive = false;
+        next();
     }
 }
 </script>

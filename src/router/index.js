@@ -18,16 +18,18 @@ export default new Router({
       component: resolve => require(['../components/page/person/Person_work.vue'], resolve)
     },
     {
-      path: '/personcenter/test',
-      component: resolve => require(['../components/page/person/Test.vue'], resolve)
+      path: '/test',
+      component: resolve => require(['../components/page/Test.vue'], resolve)
     },
     {
       path: '/earning/daily',
-      component: resolve => require(['../components/page/earning/Daily_earnings.vue'], resolve)
+      component: resolve => require(['../components/page/earning/Daily_earnings.vue'], resolve),
+      meta: {keepAlive: true}
     },
     {
       path: '/earning/daily/all',
-      component: resolve => require(['../components/page/earning/Earinings_all.vue'], resolve)
+      component: resolve => require(['../components/page/earning/Earinings_all.vue'], resolve),
+      meta: {keepAlive: true}
     },
     {
       path: '/earning/daily/detail',
@@ -35,11 +37,13 @@ export default new Router({
     },
     {
       path: '/ad/daily',
-      component: resolve => require(['../components/page/ad/Daily_payment.vue'], resolve)
+      component: resolve => require(['../components/page/ad/Daily_payment.vue'], resolve),
+      meta: {keepAlive: true}
     },
     {
       path: '/ad/daily/all',
-      component: resolve => require(['../components/page/ad/Payment_all.vue'], resolve)
+      component: resolve => require(['../components/page/ad/Payment_all.vue'], resolve),
+      meta: {keepAlive: true}
     },
     {
       path: '/ad/daily/detail',

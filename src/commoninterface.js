@@ -1,3 +1,5 @@
+import { Toast } from 'mint-ui';
+
 export default function install (Vue, options){
     /**
      * 服务器端api地址合集
@@ -133,11 +135,11 @@ export default function install (Vue, options){
                     // console.log('请求正常',response.data.data);
                     success(response.data.data)
                 }else{
-                    let err ={code:response.data.code,msg:''};
-                    switch(err.code){
-                    case '1':
-                        err.msg = '数据请求失败:'+response.data.error;
-                        break;
+                    let err ={code:response.data.code,msg:response.data.error};
+                    // switch(err.code){
+                    // case '1':
+                    //     err.msg = '数据请求失败:用户名或密码输入错误'+response.data.error;
+                    //     break;
                     // case '99998':
                     //     err.msg = '未登录';
                     //     // 调转到登陆页
@@ -146,13 +148,15 @@ export default function install (Vue, options){
                     // case '99997':
                     //     err.msg = '未具备相应的权限';
                     //     break;
-                    default:
-                        err.msg = '未知错误';
-                        break
-                    }
-                    // this.$message.error(err.msg);
+                    // default:
+                    //     err.msg = '未知错误';
+                    //     break
+                    // }
+                    Toast({
+                        message: err.msg,
+                        duration: 1500
+                    });
                     fail(err);
-
                 }
             },
             fail:function(error){

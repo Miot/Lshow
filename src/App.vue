@@ -1,6 +1,9 @@
 <template>
   <div id="app">
-    <router-view/>
+    <keep-alive>
+      <router-view v-if="$route.meta.keepAlive"></router-view>
+    </keep-alive>
+    <router-view v-if="!$route.meta.keepAlive"></router-view>
   </div>
 </template>
 
@@ -10,6 +13,7 @@
 <style lang="less">
 @import url('../static/css/yez_css_Reset.css');
 @import url('../static/css/common.less');
+@import url('../static/css/rewriteMintUI.less');
 
 #app {
   /* font-family: 'Avenir', Helvetica, Arial, sans-serif; */

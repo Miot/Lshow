@@ -12,7 +12,7 @@
   "dependencies": {
     "axios": "^0.17.1",
     "fastclick": "^1.0.6",
-    "less": "^2.7.3",
+    "less": "^3.7.1",
     "less-loader": "^4.1.0",
     "mint-ui": "^2.2.13",
     "vue": "^2.5.2",
