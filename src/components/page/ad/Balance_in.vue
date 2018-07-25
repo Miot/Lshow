@@ -32,6 +32,17 @@
                     </div>
                 </div>
 
+                <mt-popup class="popup" v-model="showPop" position="bottom">
+                    12333333<br/>
+                    12333333<br/>
+                    12333333<br/>
+                    12333333<br/>
+                </mt-popup>
+
+
+
+
+
                 <div class="rule" @click="isRead()">
                     <div class="image" :class="read?'read':''"></div>
                     <span>我已阅读并同意《<span class="statement">邻客秀广告金账户使用及管理条例</span>》</span>
@@ -43,12 +54,15 @@
 </template>
 
 <script>
+import { Popup } from 'mint-ui';
+
 export default {
     data(){
         return{
             dealt: false, // 是否完成转入操作
             read: false, // 是否已读条款
             money: '927.03',
+            showPop: true, // 底部弹出层
             input: ''
         }
     },
@@ -60,6 +74,7 @@ export default {
         // 弹出底部选择
         showBottomModel(){
             console.log('666666666');
+            this.showPop = !this.showPop;
         },
         // 点击同意条款
         isRead(){
@@ -115,5 +130,13 @@ export default {
             background-size: cover;
         }
     }
+}
+.popup{
+    width: 90%;
+    background-color: #F2F2F2;
+    border-top-left-radius: 0.3rem;
+    border-top-right-radius: 0.3rem;
+    border: 0.01rem solid #E4E4E4;
+    font-size: 0.28rem;
 }
 </style>

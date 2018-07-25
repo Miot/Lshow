@@ -17,6 +17,9 @@ th, td {
     padding: 0;
 }
 
+/* 解决页面字体会不受控制变的很大 */
+*, *:before, *:after { max-height: 100000px }
+
 /* 设置默认字体 */
 body,
 button, input, select, textarea { 
