@@ -24,7 +24,7 @@
         </div>
         <!-- 底部按钮 -->
         <div class="frame_footer">
-            <div>余额转出</div>
+            <div @click="goBalanceOut">余额转出</div>
             <div style="background:linear-gradient(225deg,rgba(0, 145, 60, 1) 0%,rgba(0, 145, 60, 1) 0%,rgba(124, 252, 0, 1) 100%,rgba(124, 252, 0, 1) 100%);color:#FFFFFF">账户充值</div>
         </div>
     </div>
@@ -51,6 +51,10 @@ export default {
         goAll(){
             this.$router.push('/ad/daily/all');
         },
+        // 跳转到余额转出页
+        goBalanceOut(){
+            this.$router.push('/ad/out');
+        },
 
         // 获取总栏数据
         getData(){
@@ -65,7 +69,7 @@ export default {
                     console.log('获取总栏数据',err);
                 }
             })
-        }
+        },
     },
     mounted(){
       this.getData();

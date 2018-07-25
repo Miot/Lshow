@@ -25,7 +25,7 @@
         <!-- 底部按钮 -->
         <div class="frame_footer">
             <div style="background:#fff">转出为广告金</div>
-            <div style="background:linear-gradient(45deg,rgba(255, 136, 0, 1) 0%,rgba(255, 136, 0, 1) 0%,rgba(255, 0, 0, 1) 100%,rgba(255, 0, 0, 1) 100%);color:#FFFFFF">转出到银行卡</div>
+            <div style="background:linear-gradient(45deg,rgba(255, 136, 0, 1) 0%,rgba(255, 136, 0, 1) 0%,rgba(255, 0, 0, 1) 100%,rgba(255, 0, 0, 1) 100%);color:#FFFFFF">余额转出</div>
         </div>
     </div>
 </template>

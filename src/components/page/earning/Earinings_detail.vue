@@ -18,7 +18,7 @@
         </div>
 
         <!-- 详细信息 -->
-        <ul class="frame_panel">
+        <ul class="detail_panel">
             <li class="each_row">
                 <div class="each_row_left">交易时间：</div>
                 <div class="each_row_right">{{incomeTime}}</div>

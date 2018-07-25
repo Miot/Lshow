@@ -41,6 +41,16 @@ export default new Router({
       meta: {keepAlive: true}
     },
     {
+      path: '/ad/out',
+      component: resolve => require(['../components/page/ad/Balance_out.vue'], resolve),
+      meta: {keepAlive: true}
+    },
+    {
+      path: '/ad/in',
+      component: resolve => require(['../components/page/ad/Balance_in.vue'], resolve),
+      meta: {keepAlive: true}
+    },
+    {
       path: '/ad/daily/all',
       component: resolve => require(['../components/page/ad/Payment_all.vue'], resolve),
       meta: {keepAlive: true}
