@@ -1,0 +1,6 @@
+中间件设置 keepAlive:ture
+    中间去其他，设置中间 from.meta.keepAlive = false;
+目标页 不用设置
+    目标去中间 to.meta.keepAlive = true;
+
+    == 中间去目标不刷新 中间去其他刷新 其他去中间也刷新
