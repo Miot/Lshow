@@ -77,7 +77,6 @@
         left: 0;
         right: 0;
         color: rgba(242, 242, 242, 0.7);
-        // text-align: center;
         :first-child{
             font-size: 0.36rem;
             color: #ffffff;
@@ -141,6 +140,7 @@
 }
 // 列表
 .Lklist {
+    -webkit-overflow-scrolling: touch;
     ul{
         width: 100%;
         height: 100%;
@@ -280,6 +280,69 @@
             overflow: hidden;
             margin-left: 1.5rem;
             height: 100%;
+        }
+    }
+}
+// 底部弹出层
+.popup{
+    height: 3.4rem;
+    width: 95%;
+    background-color: #F7F7F7;
+    border-top-left-radius: 0.3rem;
+    border-top-right-radius: 0.3rem;
+    border: 0.01rem solid #E4E4E4;
+    font-size: 0.28rem;
+    padding: 0.2rem 0.4rem;
+    display: flex;
+    flex-direction: column;
+    .popup_title {
+        flex: 1;
+        text-align: center;
+        font-size: 0.28rem;
+        font-weight: 700;
+        :first-child{
+            color:#A1A1A1;
+        }
+        :last-child{
+            float: right;
+            position: absolute;
+            color:#29B527;
+            right: 0.4rem;
+        }
+    }
+    .popup_list{
+        flex: 4;
+        display: flex;
+        flex-direction: column;
+        li{
+            border-top: 0.02rem solid #E4E4E4;
+            flex: 1;
+            display: flex;
+            text-align: center;
+            align-items:center;
+            font-weight: 700;
+            color: #868686;
+            .popup_icon{
+                flex: 1;
+                border-right: 0.02rem solid #E4E4E4;
+                margin-right: 0.2rem;
+                img{
+                    width: 0.8rem;
+                    height: 0.7rem;
+                }
+                .popup_trigon{
+                    width: 0;
+                    height: 0;
+                    border-top: 0.12rem dashed transparent;
+                    border-bottom: 0.12rem dashed transparent;
+                    border-right: 0.12rem solid #E4E4E4;
+                    margin-top: 0.25rem;
+                }
+            }
+            span{
+                flex: 3;
+                text-align: left;
+            }
         }
     }
 }

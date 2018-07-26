@@ -152,7 +152,7 @@ export default {
     mounted(){
         window.flex(true);
         this.getAccount();
-    },
+    }
 }
 </script>
 <style lang="less">

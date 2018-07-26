@@ -8,6 +8,7 @@ import MintUI from 'mint-ui'
 import 'mint-ui/lib/style.css'
 import fastclick from 'fastclick'
 import commoninterface from './commoninterface'
+import store from  '../static/js/store'
 
 // axios是ajax数据请求, MintUI是饿了么的UI框架, fastclick是优化移动端点击延迟, commoninterface是放置ajax请求的文件
 Vue.config.productionTip = false;
@@ -21,6 +22,7 @@ Vue.use(commoninterface)
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>'
 })

@@ -25,7 +25,7 @@
         <!-- 底部按钮 -->
         <div class="frame_footer">
             <div @click="goBalanceOut">余额转出</div>
-            <div style="background:linear-gradient(225deg,rgba(0, 145, 60, 1) 0%,rgba(0, 145, 60, 1) 0%,rgba(124, 252, 0, 1) 100%,rgba(124, 252, 0, 1) 100%);color:#FFFFFF">账户充值</div>
+            <div @click="goBalanceIn" style="background:linear-gradient(225deg,rgba(0, 145, 60, 1) 0%,rgba(0, 145, 60, 1) 0%,rgba(124, 252, 0, 1) 100%,rgba(124, 252, 0, 1) 100%);color:#FFFFFF">账户充值</div>
         </div>
     </div>
 </template>
@@ -54,6 +54,10 @@ export default {
         // 跳转到余额转出页
         goBalanceOut(){
             this.$router.push('/ad/out');
+        },
+        // 跳转到余额转入页
+        goBalanceIn(){
+            this.$router.push('/ad/in');
         },
 
         // 获取总栏数据

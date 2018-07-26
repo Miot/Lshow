@@ -92,12 +92,8 @@ export default {
         this.getData();
     },
     beforeRouteLeave(to, from, next) {
-      if (to.path == "/earning/daily" || to.path == "/earning/daily/all") {
         to.meta.keepAlive = true;
-      } else {
-        to.meta.keepAlive = false;
-      }
-      next();
+        next();
     }
 
 }

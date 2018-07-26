@@ -65,8 +65,14 @@ export default {
         // 完成按钮
         finishDeal(){
             this.dealt = false;
-
         }
+    },
+    mounted(){
+        window.flex(true);
+    },
+    beforeRouteLeave(to, from, next) {
+        to.meta.keepAlive = false;
+        next();
     }
 }
 </script>

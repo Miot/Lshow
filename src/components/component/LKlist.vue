@@ -1,5 +1,5 @@
 <template>
-    <v-loadmore :bottom-method="loadBottom" :bottom-all-loaded="allLoaded" ref="loadmore" :auto-fill="false" class="Lklist">
+    <v-loadmore :bottom-method="loadBottom" :bottom-all-loaded="allLoaded" ref="loadmore" :auto-fill="false" class="Lklist" >
         <ul>
             <li v-for="(item,index) in mainList" :key="index" @click="goDetail(item.id)">
                 <!-- 左侧图标 -->
@@ -79,6 +79,7 @@ export default {
                         _this.mainList = _this.mainList.concat( data.list );
                     },
                     fail: function(err) {
+                        Indicator.close();
                         console.log(err);
                     }
                 })
@@ -95,6 +96,7 @@ export default {
                         _this.mainList = _this.mainList.concat( data.list );
                     },
                     fail: function(err) {
+                        Indicator.close();
                         console.log(err);
                     }
                 })

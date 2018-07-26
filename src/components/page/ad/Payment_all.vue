@@ -116,7 +116,7 @@ export default {
     width: 100%;
     display: flex;
     text-align: center;
-    border-top: 0.01rem solid #BCBCBC;
+    border-top: 0.02rem solid #BCBCBC;
     div{
         background:#fff;
         flex: 1;

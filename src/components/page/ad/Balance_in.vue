@@ -21,33 +21,66 @@
                     <input type="number" class="text_box" :placeholder="'最小转入金额10元'" v-model="input" >  
                 </div>
 
-
                 <div class="switch">
                     <div class="title" style="margin-top:0">
-                        <span >从收益账户转入</span>
+                        <span v-if="!wechatPay">从收益账户转入</span>
+                        <span v-else>通过微信支付充值</span>
                         <span class="right" @click="showBottomModel">
-                            <span>可用余额{{money}}元</span>
+                            <span v-if="!wechatPay">可用余额{{money}}元</span>
+                            <span v-else>支持信用卡支付</span>
                             <img src="../../../../static/img/u3771.png" class="arrow">
                         </span>
                     </div>
                 </div>
-
+                <!-- 底部弹出层 -->
                 <mt-popup class="popup" v-model="showPop" position="bottom">
-                    12333333<br/>
-                    12333333<br/>
-                    12333333<br/>
-                    12333333<br/>
+                    <div class="popup_title">
+                        <span>选择转入来源</span>
+                        <span @click="showPop=false">关闭</span>
+                    </div>
+                    <ul class="popup_list">
+                        <li @click="dealWay('incomeAccount')">
+                            <div class="left popup_icon">
+                                <img src="../../../../static/img/u4347.png">
+                                <div class="right popup_trigon"></div> 
+                            </div>
+                            <span>从邻客秀收益账户转入</span>
+                        </li>
+                        <li @click="dealWay('wechatPay')">
+                            <div class="left popup_icon">
+                                <img src="../../../../static/img/u4349.png">
+                                <div class="right popup_trigon"></div> 
+                            </div>
+                            <span>使用微信支付充值</span>
+                        </li>
+                    </ul>
                 </mt-popup>
-
-
-
-
 
                 <div class="rule" @click="isRead()">
                     <div class="image" :class="read?'read':''"></div>
                     <span>我已阅读并同意《<span class="statement">邻客秀广告金账户使用及管理条例</span>》</span>
                 </div>
                 <div class="panel_footer" @click="sureTransfer()" style="background-color:rgba(41, 181, 39, 1)">确认转入</div>
+            </div>
+
+            <!-- 转出结果 -->
+            <div v-else>
+                <div class="title">转入成功：</div>
+                <div class="list">
+                    <ul class="left_list">
+                        <li>转入金额：</li>
+                        <li>转入时间：</li>
+                        <li>结算余额：</li>
+                        <li>转入说明：</li>
+                    </ul>
+                    <ul class="right_list">
+                        <li>100.00</li>
+                        <li>2018.6.23 15:20:10</li>
+                        <li>2012.02</li>
+                        <li>通过 邻客秀收益账户转入广告金</li>
+                    </ul>
+                </div>
+                <div class="panel_footer" style="background-color:rgba(174, 174, 174, 1)" @click="finishDeal">完成</div>
             </div>
         </div>
     </div>
@@ -61,9 +94,10 @@ export default {
         return{
             dealt: false, // 是否完成转入操作
             read: false, // 是否已读条款
-            money: '927.03',
-            showPop: true, // 底部弹出层
-            input: ''
+            money: '927.03', // 余额
+            showPop: false, // 底部弹出层
+            input: '', // 输入框
+            wechatPay: false, //是否使用微信支付
         }
     },
     methods:{
@@ -71,16 +105,34 @@ export default {
         sureTransfer(){
             this.dealt = true;
         },
+        // 完成按钮
+        finishDeal(){
+            this.dealt = false;
+        },
         // 弹出底部选择
         showBottomModel(){
-            console.log('666666666');
             this.showPop = !this.showPop;
         },
         // 点击同意条款
         isRead(){
             this.read = !this.read;
-
         },
+        // 选择支付方式
+        dealWay(type){
+            if(type == 'incomeAccount'){
+                this.wechatPay = false;
+            }else if(type == 'wechatPay'){
+                this.wechatPay = true;
+            };
+            this.showPop=false;
+        }
+    },
+    mounted(){
+        window.flex(true);
+    },
+    beforeRouteLeave(to, from, next) {
+        to.meta.keepAlive = false;
+        next();
     }
 }
 </script>
@@ -130,13 +182,5 @@ export default {
             background-size: cover;
         }
     }
-}
-.popup{
-    width: 90%;
-    background-color: #F2F2F2;
-    border-top-left-radius: 0.3rem;
-    border-top-right-radius: 0.3rem;
-    border: 0.01rem solid #E4E4E4;
-    font-size: 0.28rem;
 }
 </style>

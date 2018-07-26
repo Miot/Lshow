@@ -12,20 +12,20 @@
                 </div>
                 <img src="../../../../static/img/u3870.png" class="right" @click="goAll">
             </div>
-            <div class="head_bottom">
+            <div class="head_bottom" @click="test()">
                 <div class="hyaline"></div>
                 <span class="left">累计收益：{{accData.accTotalIn}}</span>
                 <span class="right">账户余额：{{accData.accBlance}}</span>
             </div>
         </div>
         <!-- 列表 -->
-        <div class="daily_list">
+        <div class="daily_list" ref="wrapper"> 
             <LKlist :type="type"></LKlist>
         </div>
         <!-- 底部按钮 -->
         <div class="frame_footer">
-            <div style="background:#fff">转出为广告金</div>
-            <div style="background:linear-gradient(45deg,rgba(255, 136, 0, 1) 0%,rgba(255, 136, 0, 1) 0%,rgba(255, 0, 0, 1) 100%,rgba(255, 0, 0, 1) 100%);color:#FFFFFF">余额转出</div>
+            <div @click="goBalanceIn" style="background:#fff">转出为广告金</div>
+            <div @click="goBalanceOut" style="background:linear-gradient(45deg,rgba(255, 136, 0, 1) 0%,rgba(255, 136, 0, 1) 0%,rgba(255, 0, 0, 1) 100%,rgba(255, 0, 0, 1) 100%);color:#FFFFFF">余额转出</div>
         </div>
     </div>
 </template>
@@ -47,9 +47,20 @@ export default {
         }
     },
     methods:{
+        test(){
+            this.$refs.wrapper.scrollTop = 720.7999877929688
+        },
         // 跳转到全部收益记录页
         goAll(){
             this.$router.push('/earning/daily/all');
+        },
+        // 跳转到转出为广告金页
+        goBalanceIn(){
+            this.$router.push('/ad/in');
+        },
+        // 跳转到余额转出页
+        goBalanceOut(){
+            this.$router.push('/earning/out');
         },
         // 获取总栏数据
         getData(){
@@ -67,10 +78,16 @@ export default {
         }
     },
     mounted(){
-      this.getData();
+        this.getData();
+        console.log('刷新了');
+        // this.contentH = document.documentElement.clientHeight - this.$refs.wrapper.getBoundingClientRect().top - 50;
     },
     beforeRouteLeave(to, from, next) {
+        let _this = this;
         from.meta.keepAlive = false;
+        if(to.path == '/personcenter'){
+            _this.$destroy();
+        }
         next();
     }
 }
@@ -81,7 +98,6 @@ export default {
     background: url('../../../../static/img/u3761.png');
     background-size: cover;
 }
-
 </style>
 
 
