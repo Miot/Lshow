@@ -91,12 +91,8 @@ export default {
         this.getData();
     },
     beforeRouteLeave(to, from, next) {
-      if (to.path == "/ad/daily" || to.path == "/ad/daily/all") {
         to.meta.keepAlive = true;
-      } else {
-        to.meta.keepAlive = false;
-      }
-      next();
+        next();
     }
 }
 </script>

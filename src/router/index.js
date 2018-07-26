@@ -28,8 +28,7 @@ export default new Router({
     },
     {
       path: '/earning/out',
-      component: resolve => require(['../components/page/earning/Balance_out.vue'], resolve),
-      meta: {keepAlive: false}
+      component: resolve => require(['../components/page/earning/Balance_out.vue'], resolve)
     },
     {
       path: '/earning/daily/all',
@@ -47,13 +46,11 @@ export default new Router({
     },
     {
       path: '/ad/out',
-      component: resolve => require(['../components/page/ad/Balance_out.vue'], resolve),
-      meta: {keepAlive: false}
+      component: resolve => require(['../components/page/ad/Balance_out.vue'], resolve)
     },
     {
       path: '/ad/in',
-      component: resolve => require(['../components/page/ad/Balance_in.vue'], resolve),
-      meta: {keepAlive: false}
+      component: resolve => require(['../components/page/ad/Balance_in.vue'], resolve)
     },
     {
       path: '/ad/daily/all',

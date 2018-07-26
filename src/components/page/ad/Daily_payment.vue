@@ -76,10 +76,14 @@ export default {
         },
     },
     mounted(){
-      this.getData();
+        this.getData();
     },
     beforeRouteLeave(to, from, next) {
+        let _this = this;
         from.meta.keepAlive = false;
+        if(to.path == '/personcenter'){
+            _this.$destroy();
+        }
         next();
     }
 }

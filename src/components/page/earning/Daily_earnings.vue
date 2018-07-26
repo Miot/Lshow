@@ -19,7 +19,7 @@
             </div>
         </div>
         <!-- 列表 -->
-        <div class="daily_list" ref="wrapper"> 
+        <div class="daily_list" ref="scroll"> 
             <LKlist :type="type"></LKlist>
         </div>
         <!-- 底部按钮 -->
@@ -48,7 +48,7 @@ export default {
     },
     methods:{
         test(){
-            this.$refs.wrapper.scrollTop = 720.7999877929688
+            this.$refs.scroll.scrollTop = 720.7999877929688
         },
         // 跳转到全部收益记录页
         goAll(){
@@ -78,9 +78,8 @@ export default {
         }
     },
     mounted(){
-        this.getData();
+        // this.getData();
         console.log('刷新了');
-        // this.contentH = document.documentElement.clientHeight - this.$refs.wrapper.getBoundingClientRect().top - 50;
     },
     beforeRouteLeave(to, from, next) {
         let _this = this;

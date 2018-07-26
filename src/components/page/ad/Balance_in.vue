@@ -3,7 +3,7 @@
         <!-- 顶部信息 -->
         <div class="frame_head">
             <div class="head_top">
-                <img src="../../../../static/img/u3733.png" class="left">
+                <img src="../../../../static/img/u3733.png" class="left" @click="test()">
             </div>
             <div class="head_msg">
                 <p>广告账户余额仅用于邻客秀平台投放广告</p>
@@ -18,7 +18,8 @@
                 <div class="title">
                     <span>转入金额</span>
                     <span class="right">当前余额{{money}}元</span>
-                    <input type="number" class="text_box" :placeholder="'最小转入金额10元'" v-model="input" >  
+                    <input type="number" step="0.01" min="0.01" max="10" class="text_box" :placeholder="'最小转入金额10元'" v-model="input">  
+                    <input type="submit" />
                 </div>
 
                 <div class="switch">
@@ -101,6 +102,9 @@ export default {
         }
     },
     methods:{
+        test(){
+            console.log(this.input);
+        },
         // 确认转入按钮
         sureTransfer(){
             this.dealt = true;

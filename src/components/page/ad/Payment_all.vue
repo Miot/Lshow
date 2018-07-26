@@ -96,9 +96,10 @@ export default {
         Indicator.open();
         this.getList();
     },
-
-
-
+    beforeRouteLeave(to, from, next) {
+        from.meta.keepAlive = false;
+        next();
+    }
 
 }
 </script>
