@@ -12,7 +12,7 @@
                 </div>
                 <img src="../../../../static/img/u3870.png" class="right" @click="goAll">
             </div>
-            <div class="head_bottom" @click="test()">
+            <div class="head_bottom">
                 <div class="hyaline"></div>
                 <span class="left">累计收益：{{accData.accTotalIn}}</span>
                 <span class="right">账户余额：{{accData.accBlance}}</span>
@@ -47,9 +47,6 @@ export default {
         }
     },
     methods:{
-        test(){
-            this.$refs.scroll.scrollTop = 720.7999877929688
-        },
         // 跳转到全部收益记录页
         goAll(){
             this.$router.push('/earning/daily/all');
@@ -78,16 +75,34 @@ export default {
         }
     },
     mounted(){
-        // this.getData();
-        console.log('刷新了');
+        this.getData();
+    },
+    activated(){
+        // 还原滚动位置
+        this.$refs.scroll.scrollTop = this.$store.state.dailyPageYOffset;
+        console.log('还原处理');
     },
     beforeRouteLeave(to, from, next) {
+        // 记录滚动位置
+        this.$store.commit('setDailyPageYOffset', this.$refs.scroll.scrollTop);
         let _this = this;
-        from.meta.keepAlive = false;
-        if(to.path == '/personcenter'){
-            _this.$destroy();
+
+
+        // if(to.path == '/personcenter'){
+        //     _this.$destroy();
+        // }else if(to.path == '/ad/in'){
+        //     from.meta.keepAlive = false;
+        // }else if(to.path == '/earning/out'){
+        //     from.meta.keepAlive = false;
+        // }
+
+        if(to.path == '/earning/daily/detail'){
+            from.meta.keepAlive = true;
+            next();
+        }else{
+            this.$destroy();
+            next();
         }
-        next();
     }
 }
 </script>

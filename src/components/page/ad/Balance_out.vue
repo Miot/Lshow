@@ -21,7 +21,7 @@
                 </div>
                 <div class="title" style="margin:0.4rem 0.5rem 0.5rem">  
                     <span>转出金额：</span>
-                    <input type="number" class="text_box" :placeholder="'最大可转出金额'+money+'元'" v-model="input">  
+                    <input type="number" class="text_box" :placeholder="'最大可转出金额'+money+'元'" v-model="input" @keyup="moneyRule(input)">  
                 </div>
                 <div class="panel_footer" @click="sureTransfer()" style="background-color:rgba(41, 181, 39, 1)">确认转出</div>
             </div>
@@ -65,14 +65,24 @@ export default {
         // 完成按钮
         finishDeal(){
             this.dealt = false;
+        },
+        // 金额验证
+        moneyRule(value){
+            let reg = /(^[1-9](\d+)?(\.\d{1,2})?$)|(^0$)|(^\d\.\d{1,2}$)/;
+            let max = 100;
+            if( value <= max ){
+                if(!reg.test(value)){
+                    this.input = '';
+                }else{
+                    this.input = value;
+                }
+            }else{
+                this.input = '';
+            }
         }
     },
     mounted(){
         window.flex(true);
-    },
-    beforeRouteLeave(to, from, next) {
-        to.meta.keepAlive = false;
-        next();
     }
 }
 </script>

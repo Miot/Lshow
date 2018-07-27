@@ -1,5 +1,5 @@
 <template>
-    <v-loadmore :bottom-method="loadBottom" :bottom-all-loaded="allLoaded" ref="loadmore" :auto-fill="false" class="Lklist" >
+    <v-loadmore :bottom-method="loadBottom" :bottom-all-loaded="allLoaded" ref="loadmore" :auto-fill="false" class="Lklist">
         <ul>
             <li v-for="(item,index) in mainList" :key="index" @click="goDetail(item.id)">
                 <!-- 左侧图标 -->

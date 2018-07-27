@@ -3,7 +3,7 @@ import Router from 'vue-router'
 
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   routes: [
     {
       path: '/',
@@ -24,7 +24,7 @@ export default new Router({
     {
       path: '/earning/daily',
       component: resolve => require(['../components/page/earning/Daily_earnings.vue'], resolve),
-      meta: {keepAlive: true}
+      meta: {keepAlive: true},
     },
     {
       path: '/earning/out',
@@ -63,3 +63,11 @@ export default new Router({
     },
   ]
 })
+
+router.afterEach( (to,from) => {
+  if( to.path == '/earning/daily'  &&  from.path == '/earning/daily/detail'){
+    window.location.reload();
+  }
+})
+
+export default router

@@ -20,7 +20,7 @@
                 <div class="title" style="color:#FF4400">
                     <span>转出金额</span>
                     <span class="right">当前可提现余额{{money}}元</span>
-                    <input type="number" class="text_box" :placeholder="'最小转出金额100元'" v-model="input" >  
+                    <input type="number" class="text_box" :placeholder="'最小转出金额100元'" v-model="input" @keyup="moneyRule(input)">  
                 </div>
                
                 <div class="switch">
@@ -117,14 +117,24 @@ export default {
                 });
             };
             this.showPop=false;
+        },
+        // 金额验证
+        moneyRule(value){
+            let reg = /(^[1-9](\d+)?(\.\d{1,2})?$)|(^0$)|(^\d\.\d{1,2}$)/;
+            let max = 100;
+            if( value <= max ){
+                if(!reg.test(value)){
+                    this.input = '';
+                }else{
+                    this.input = value;
+                }
+            }else{
+                this.input = '';
+            }
         }
     },
     mounted(){
         window.flex(true);
-    },
-    beforeRouteLeave(to, from, next) {
-        to.meta.keepAlive = false;
-        next();
     }
 }
 </script>

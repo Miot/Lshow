@@ -19,7 +19,7 @@
             </div>
         </div>
         <!-- 列表 -->
-        <div class="daily_list">
+        <div class="daily_list" ref="scroll">
             <LKlist :type="type"></LKlist>
         </div>
         <!-- 底部按钮 -->
@@ -78,11 +78,19 @@ export default {
     mounted(){
         this.getData();
     },
+    activated(){
+        // 还原滚动位置
+        this.$refs.scroll.scrollTop = this.$store.state.dailyPageYOffset;
+        this.$store.commit('setDailyPageYOffset', 0);
+    },
     beforeRouteLeave(to, from, next) {
+        // 记录滚动位置
+        this.$store.commit('setDailyPageYOffset', this.$refs.scroll.scrollTop);
         let _this = this;
         from.meta.keepAlive = false;
         if(to.path == '/personcenter'){
             _this.$destroy();
+            _this.$store.commit('setDailyPageYOffset', 0);
         }
         next();
     }

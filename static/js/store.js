@@ -5,12 +5,16 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
   state:{
-    pageYOffset: 0
+    dailyPageYOffset: 0,
+    allPageYOffset: 0
   },
   mutations:{
-    setPageYOffset(state, val) {
-        state.pageYOffset = val;
-    }
+    setDailyPageYOffset(state, val) {
+      state.dailyPageYOffset = val;
+    },
+    setAllPageYOffset(state, val) {
+      state.allPageYOffset = val;
+  },
   }
 })
 

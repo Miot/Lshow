@@ -140,7 +140,6 @@
 }
 // 列表
 .Lklist {
-    -webkit-overflow-scrolling: touch;
     ul{
         width: 100%;
         height: 100%;
@@ -198,16 +197,20 @@
     color:#424242;
 }
 .daily_list{
-    width:100%;
-    overflow-y:scroll;
-    position:absolute;
+    -webkit-overflow-scrolling: touch;
+    width: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    position: absolute;
     bottom: 1rem;
     top: 2.76rem;
 }
 .all_list{
-    width:100%;
-    overflow-y:scroll;
-    position:absolute;
+    -webkit-overflow-scrolling: touch;
+    width: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    position: absolute;
     bottom: 1rem;
     top: 0;
 }

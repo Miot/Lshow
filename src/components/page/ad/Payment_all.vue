@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="all_list">
+        <div class="all_list" ref="scroll">
             <v-loadmore :bottom-method="loadBottom" :bottom-all-loaded="allLoaded" ref="loadmore" :auto-fill="false" class="Lklist">
                 <ul>
                     <li v-for="(item,index) in mainList" :key="index" @click="goDetail(item.id)">
@@ -96,7 +96,14 @@ export default {
         Indicator.open();
         this.getList();
     },
+    activated(){
+        // 还原滚动位置
+        this.$refs.scroll.scrollTop = this.$store.state.allPageYOffset;
+        this.$store.commit('setAllPageYOffset', 0);
+    },
     beforeRouteLeave(to, from, next) {
+        // 记录滚动位置
+        this.$store.commit('setAllPageYOffset', this.$refs.scroll.scrollTop);
         from.meta.keepAlive = false;
         next();
     }

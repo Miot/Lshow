@@ -18,8 +18,7 @@
                 <div class="title">
                     <span>转入金额</span>
                     <span class="right">当前余额{{money}}元</span>
-                    <input type="number" step="0.01" min="0.01" max="10" class="text_box" :placeholder="'最小转入金额10元'" v-model="input">  
-                    <input type="submit" />
+                    <input type="number" class="text_box" :placeholder="'最小转入金额10元'" v-model="input" @keyup="moneyRule(input)">  
                 </div>
 
                 <div class="switch">
@@ -129,14 +128,24 @@ export default {
                 this.wechatPay = true;
             };
             this.showPop=false;
+        },
+        // 金额验证
+        moneyRule(value){
+            let reg = /(^[1-9](\d+)?(\.\d{1,2})?$)|(^0$)|(^\d\.\d{1,2}$)/;
+            let max = 100;
+            if( value <= max ){
+                if(!reg.test(value)){
+                    this.input = '';
+                }else{
+                    this.input = value;
+                }
+            }else{
+                this.input = '';
+            }
         }
     },
     mounted(){
         window.flex(true);
-    },
-    beforeRouteLeave(to, from, next) {
-        to.meta.keepAlive = false;
-        next();
     }
 }
 </script>
