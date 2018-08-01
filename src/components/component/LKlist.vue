@@ -105,7 +105,9 @@ export default {
     },
     mounted(){
         window.flex(true);
-        this.getList();
+        if(this.$route.meta.isBack){
+            this.getList();
+        }
     }
 }
 </script>

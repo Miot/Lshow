@@ -75,9 +75,6 @@ export default {
         }
     },
     mounted(){
-        // this.getData();
-    },
-    activated(){
         if(this.$route.meta.isBack){
             this.getData();
         }else{
@@ -85,7 +82,6 @@ export default {
             this.$refs.scroll.scrollTop = this.$store.state.dailyPageYOffset;
         }
     },
-
     beforeRouteLeave(to, from, next) {
         // 记录滚动位置
         this.$store.commit('setDailyPageYOffset', this.$refs.scroll.scrollTop);
