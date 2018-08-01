@@ -24,7 +24,7 @@ const router = new Router({
     {
       path: '/earning/daily',
       component: resolve => require(['../components/page/earning/Daily_earnings.vue'], resolve),
-      meta: { keepAlive: true, isBack:true },
+      meta: { isBack:true },
     },
     {
       path: '/earning/out',
@@ -33,7 +33,6 @@ const router = new Router({
     {
       path: '/earning/daily/all',
       component: resolve => require(['../components/page/earning/Earinings_all.vue'], resolve),
-      meta: {keepAlive: true}
     },
     {
       path: '/earning/daily/detail',
@@ -42,7 +41,6 @@ const router = new Router({
     {
       path: '/ad/daily',
       component: resolve => require(['../components/page/ad/Daily_payment.vue'], resolve),
-      meta: {keepAlive: true}
     },
     {
       path: '/ad/out',
@@ -55,7 +53,6 @@ const router = new Router({
     {
       path: '/ad/daily/all',
       component: resolve => require(['../components/page/ad/Payment_all.vue'], resolve),
-      meta: {keepAlive: true}
     },
     {
       path: '/ad/daily/detail',
