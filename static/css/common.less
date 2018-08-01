@@ -4,7 +4,7 @@
     background: #ffffff;
     height: 100%;
     width: 100%;
-    overflow: hidden;
+    -webkit-overflow-scrolling: touch;
 }
 // 左浮动
 .left{
@@ -104,6 +104,10 @@
         }
     }
 }
+// 重写滚动条样式
+.srcoller::-webkit-scrollbar {
+    width: 0.09rem;
+}
 // 详细信息盒子
 .detail_panel{
     width: 90%;
@@ -197,10 +201,11 @@
     color:#424242;
 }
 .daily_list{
-    -webkit-overflow-scrolling: touch;
+    -webkit-overflow-scrolling:touch;
+    overflow:auto;
     width: 100%;
-    overflow-y: scroll;
-    overflow-x: hidden;
+    // overflow-x: hidden;
+    // overflow-y: auto;
     position: absolute;
     bottom: 1rem;
     top: 2.76rem;

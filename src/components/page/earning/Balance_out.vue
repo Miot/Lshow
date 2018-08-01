@@ -135,6 +135,10 @@ export default {
     },
     mounted(){
         window.flex(true);
+    },
+    beforeRouteLeave(to,from,next){
+        to.meta.isBack = true;
+        next();
     }
 }
 </script>

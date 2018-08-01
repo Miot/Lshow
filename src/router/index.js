@@ -24,7 +24,7 @@ const router = new Router({
     {
       path: '/earning/daily',
       component: resolve => require(['../components/page/earning/Daily_earnings.vue'], resolve),
-      meta: {keepAlive: true},
+      meta: { keepAlive: true, isBack:true },
     },
     {
       path: '/earning/out',
@@ -64,10 +64,10 @@ const router = new Router({
   ]
 })
 
-router.afterEach( (to,from) => {
-  if( to.path == '/earning/daily'  &&  from.path == '/earning/daily/detail'){
-    window.location.reload();
-  }
-})
+// router.afterEach( (to,from) => {
+//   if( to.path == '/earning/daily'  &&  from.path == '/earning/out'){
+//     window.location.reload();
+//   }
+// })
 
 export default router

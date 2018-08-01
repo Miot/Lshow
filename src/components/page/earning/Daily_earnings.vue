@@ -19,7 +19,7 @@
             </div>
         </div>
         <!-- 列表 -->
-        <div class="daily_list" ref="scroll"> 
+        <div class="daily_list srcoller" ref="scroll"> 
             <LKlist :type="type"></LKlist>
         </div>
         <!-- 底部按钮 -->
@@ -75,35 +75,22 @@ export default {
         }
     },
     mounted(){
-        this.getData();
+        // this.getData();
     },
     activated(){
-        // 还原滚动位置
-        this.$refs.scroll.scrollTop = this.$store.state.dailyPageYOffset;
-        console.log('还原处理');
+        if(this.$route.meta.isBack){
+            this.getData();
+        }else{
+            // 还原滚动位置
+            this.$refs.scroll.scrollTop = this.$store.state.dailyPageYOffset;
+        }
     },
+
     beforeRouteLeave(to, from, next) {
         // 记录滚动位置
         this.$store.commit('setDailyPageYOffset', this.$refs.scroll.scrollTop);
-        let _this = this;
-
-
-        // if(to.path == '/personcenter'){
-        //     _this.$destroy();
-        // }else if(to.path == '/ad/in'){
-        //     from.meta.keepAlive = false;
-        // }else if(to.path == '/earning/out'){
-        //     from.meta.keepAlive = false;
-        // }
-
-        if(to.path == '/earning/daily/detail'){
-            from.meta.keepAlive = true;
-            next();
-        }else{
-            this.$destroy();
-            next();
-        }
-    }
+        next();
+    },
 }
 </script>
 

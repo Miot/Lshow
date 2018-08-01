@@ -91,11 +91,10 @@ export default {
     mounted(){
         this.getData();
     },
-    beforeRouteLeave(to, from, next) {
-        to.meta.keepAlive = true;
+    beforeRouteLeave(to,from,next){
+        to.meta.isBack = false;
         next();
     }
-
 }
 </script>
 
