@@ -53,7 +53,7 @@ export default {
     data(){
         return{
             dealt: false, // 是否完成转出操作
-            money: '122.32',
+            money: 122.32,
             input: ''
         }
     },
@@ -69,8 +69,7 @@ export default {
         // 金额验证
         moneyRule(value){
             let reg = /(^[1-9](\d+)?(\.\d{1,2})?$)|(^0$)|(^\d\.\d{1,2}$)/;
-            let max = 100;
-            if( value <= max ){
+            if( value <= this.money ){
                 if(!reg.test(value)){
                     this.input = '';
                 }else{

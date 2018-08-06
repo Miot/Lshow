@@ -1,16 +1,29 @@
 <template>
-    <v-loadmore :bottom-method="loadBottom" :bottom-all-loaded="allLoaded" ref="loadmore" :auto-fill="false" class="LKlist">
+    <v-loadmore :bottom-method="loadBottom" :bottom-all-loaded="allLoaded" ref="loadmore" :auto-fill="false" class="Lklist">
         <ul>
-            <li v-for="(item,index) in mainList" :key="index" @click="type == 'earn'?goAll(item.incomeDate):goAll(item.outlayDate)" :class=" type == 'earn'?'each_li':'each_li paymentstyle' ">
-                <ul :class="item.isToday?'highlight':''">
-                    <li>{{type == 'earn'?item.incomeDate:item.outlayDate}}</li>
-                    <li>{{type == 'earn'?item.inMoney:item.outMoney}}</li>
-                    <li>{{type !== 'earn'?item.inMoney:item.outMoney}}</li>
-                    <li>{{item.balance}}</li>
-                </ul>
+            <li v-for="(item,index) in mainList" :key="index" @click="goDetail(item.id)">
+                <!-- 左侧图标 -->
+                <div class="left icon">
+                    <img :src="type=='earn'?'../../../static/img/u3770.png':'../../../static/img/u3883.png'">
+                    <div class="trigon right"></div> 
+                </div>
+                <!-- 中间数据信息 -->
+                <div class="data">
+                    <div class="left" style="flex:3">
+                        <!-- <p>{{type=='earn'?item.incomeText:item.outlayText}}</p> -->
+                        <p>今日支出:10 今日支出:10</p>
+                        <p>{{type=='earn'?item.incomeTime:item.outlayTime}}</p>
+                    </div>
+                    <div class="right" style="text-align:right;flex:1">
+                        <!-- <p :style="{'color':type=='earn'?'green':'red'}" style="font-size:0.3rem">{{item.money}}</p> -->
+                        <p>{{item.balance}}</p>
+                    </div>
+                </div>
+                <!-- 右侧图标 -->
+                <img src="../../../static/img/u3771.png" class="arrow">
             </li>
+            <!-- 底部提示 -->
         </ul>
-        <!-- 底部提示 -->
         <span class="noMoreMsg" v-if="noMore">没有更多了</span>
     </v-loadmore>
 </template>
@@ -33,21 +46,14 @@ export default {
         }
     },
     methods:{
-        // 跳转到指定日期详细收益/支出页面
-        goAll(date){
-            if( date == '今日' ){
-                var temp = new Date(new Date());
-                var mon = temp.getMonth() + 1;
-                var day = temp.getDate();
-                var currentDate = temp.getFullYear() + "-" + (mon<10?"0"+mon:mon) + "-" +(day<10?"0"+day:day);
-                sessionStorage.setItem('currentDate',currentDate);
-            }else{
-                sessionStorage.setItem('currentDate',date);
-            }
+        // 查看详情
+        goDetail(id){
+            // sessionStorage.setItem('itemID',id);
             if(this.type == 'earn'){
+                sessionStorage.setItem('currentDate','2018-7-20');
                 this.$router.push('/earning/daily/all');
             }else if(this.type == 'pay'){
-                this.$router.push('/ad/daily/all');
+                this.$router.push('/ad/daily/detail');
             }
         },
 
@@ -63,7 +69,7 @@ export default {
             let _this = this;
             Indicator.open();
             if(_this.type == 'earn'){
-                _this.LKshow.api.account.getInDailyLogs({
+                _this.LKshow.api.account.getInLogs({
                     data:{
                         size:_this.pageSize,
                         index:_this.pageIndex,
@@ -72,18 +78,6 @@ export default {
                         Indicator.close();
                         _this.noMore = data.last;
                         _this.allLoaded = data.last?true:false;
-                        var temp = new Date();
-                        var mon = temp.getMonth() + 1;
-                        var day = temp.getDate();
-                        var tody = temp.getFullYear() + "-" + (mon<10?"0"+mon:mon) + "-" +(day<10?"0"+day:day);
-                        for(var i of data.list){
-                            if(i.incomeDate == tody){
-                                i.isToday = true;
-                                i.incomeDate = '今日';
-                            }else{
-                                i.isToday = false;
-                            }
-                        }
                         _this.mainList = _this.mainList.concat( data.list );
                     },
                     fail: function(err) {
@@ -92,7 +86,7 @@ export default {
                     }
                 })
             }else{
-                _this.LKshow.api.account.getOutDailyLogs({
+                _this.LKshow.api.account.getOutLogs({
                     data:{
                         size:_this.pageSize,
                         index:_this.pageIndex,
@@ -101,18 +95,6 @@ export default {
                         Indicator.close();
                         _this.noMore = data.last;
                         _this.allLoaded = data.last?true:false;
-                        var temp = new Date();
-                        var mon = temp.getMonth() + 1;
-                        var day = temp.getDate();
-                        var tody = temp.getFullYear() + "-" + (mon<10?"0"+mon:mon) + "-" +(day<10?"0"+day:day);
-                        for(var i of data.list){
-                            if(i.incomeDate == tody){
-                                i.isToday = true;
-                                i.incomeDate = '今日';
-                            }else{
-                                i.isToday = false;
-                            }
-                        }
                         _this.mainList = _this.mainList.concat( data.list );
                     },
                     fail: function(err) {

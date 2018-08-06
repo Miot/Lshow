@@ -5,7 +5,7 @@
             <div class="head_left">
                 <img :src="userInfo.headImg" class="avatar">
                 <div class="user">
-                    <p style="font-size:0.35rem">Linker.{{userInfo.nickName}}</p>
+                    <p style="font-size:0.35rem">{{userInfo.nickName}}</p>
                     <p style="font-size:0.25rem">No.{{userInfo.linkerNo}}</p>
                 </div>
             </div>
@@ -137,6 +137,8 @@ export default {
                     _this.adaccData.adaccTodayOut = data.adaccTodayOut;
                     _this.adaccData.adaccTotalOut = data.adaccTotalOut;
                     _this.adaccData.adaccBlance = data.adaccBlance;
+                    // 记录用户开始使用的日期
+                    sessionStorage.setItem('startDate',data.startDate);
                 },
                 fail:function(err){
                     console.log('获取用户信息出错',err);

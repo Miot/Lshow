@@ -90,7 +90,7 @@ export default {
             dealt: false, // 是否完成转出操作
             showPop: false, // 底部弹出层
             input: '',
-            money: '100.01'
+            money: 100.01
         }
     },
     methods:{
@@ -121,8 +121,7 @@ export default {
         // 金额验证
         moneyRule(value){
             let reg = /(^[1-9](\d+)?(\.\d{1,2})?$)|(^0$)|(^\d\.\d{1,2}$)/;
-            let max = 100;
-            if( value <= max ){
+            if( value <= this.money ){
                 if(!reg.test(value)){
                     this.input = '';
                 }else{
@@ -136,10 +135,6 @@ export default {
     mounted(){
         window.flex(true);
     },
-    beforeRouteLeave(to,from,next){
-        to.meta.isBack = true;
-        next();
-    }
 }
 </script>
 

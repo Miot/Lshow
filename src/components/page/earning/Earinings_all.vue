@@ -1,7 +1,18 @@
 <template>
     <div id="container">
-        <div class="all_list" ref="scroll">
-            <v-loadmore :bottom-method="loadBottom" :bottom-all-loaded="allLoaded" ref="loadmore" :auto-fill="false" class="Lklist">
+        <div class="timePicker">
+            <div class="side" @click="preDate()">
+                <img src="../../../../static/img/arrow_left.png">
+                前一天
+            </div>
+            <span>{{showDate}}</span>
+            <div class="side" @click="nextDate()">
+                后一天
+                <img src="../../../../static/img/arrow_right.png">
+            </div>
+        </div>
+        <div class="all_list scroller" ref="scroll">
+            <v-loadmore :bottom-method="loadBottom" :bottom-all-loaded="allLoaded" ref="loadmore" :auto-fill="false" class="dailyList">
                 <ul>
                     <li v-for="(item,index) in mainList" :key="index" @click="goDetail(item.id)">
                         <!-- 左侧图标 -->
@@ -37,7 +48,9 @@
 </template>
 
 <script>
-import { Loadmore, Indicator } from 'mint-ui';
+import { Loadmore, Indicator, Toast } from 'mint-ui';
+
+
 
 export default {
     components: {  
@@ -51,7 +64,12 @@ export default {
             mainList:[],//存放数据
             pageIndex:1, //第几页
             pageSize:20, //一页多少条数据
-            opt:'' //支出还是收入，置空为显示全部
+            opt:'', //支出还是收入，置空为显示全部
+            currentDate:'', // 传数据时用的日期
+            showDate:'', // 前端显示的日期
+            preIndex:1, // 后退了几天
+            nextIndex:1, // 前进了几天
+            dDate:0, // 传入日期之差
         }
     },
     methods:{
@@ -71,7 +89,8 @@ export default {
                 data:{
                     size:_this.pageSize,
                     index:_this.pageIndex,
-                    opt:opt
+                    opt:opt,
+                    incomeDate:_this.currentDate
                 },
                 success: function(data) {
                     Indicator.close();
@@ -82,32 +101,105 @@ export default {
                 fail: function(err) {
                     console.log(err);
                 }
-            })
+            });
         },
 
         // 查看详情
         goDetail(id){
             sessionStorage.setItem('itemID',id);
             this.$router.push('/earning/daily/detail');
+        },
+
+        // 获取“当前”日期
+        getDate(){
+            // 获取“当前”日期与真实日期的差值
+            var s1 = sessionStorage.getItem('currentDate');
+            s1 = new Date(s1.replace(/-/g, "/"));
+            this.dDate = parseInt( (new Date().getTime() - s1.getTime()) / (1000 * 60 * 60 * 24));
+            var date = new Date();
+            date.setDate(date.getDate() - this.dDate);
+            // 格式化标准时间
+            this.formatDate(date);
+        },
+
+        // 前一天
+        preDate(){
+            if( sessionStorage.getItem('startDate') == this.currentDate ){
+                Toast({
+                    message: '无更早数据了',
+                    duration: 1500
+                })
+            }else{
+                var temp = new Date();
+                temp.setDate(temp.getDate()-this.preIndex+this.nextIndex-1-this.dDate);  
+                this.formatDate(temp);
+                this.preIndex += 1;
+                this.pageIndex = 1;
+                this.mainList = [];
+                this.getList();
+            }
+        },
+
+        // 后一天
+        nextDate(){
+            var temp = new Date();
+            var mon = temp.getMonth() + 1;
+            var day = temp.getDate();
+            var tempDate = temp.getFullYear() + "-" + (mon<10?"0"+mon:mon) + "-" +(day<10?"0"+day:day);
+            if( tempDate == this.currentDate ){
+                Toast({
+                    message: '已是最新一天了',
+                    duration: 1500
+                })
+            }else{
+                temp.setDate(temp.getDate()+this.nextIndex-this.preIndex+1-this.dDate); 
+                this.formatDate(temp);
+                this.nextIndex += 1;
+                this.pageIndex = 1;
+                this.mainList = [];
+                this.getList();
+            }
+        },
+        
+        // 把标准时间转换为 yyyy-mm-dd
+        formatDate(date){
+            var temp = new Date(date);
+            var mon = temp.getMonth() + 1;
+            var day = temp.getDate();
+            this.currentDate = temp.getFullYear() + "-" + (mon<10?"0"+mon:mon) + "-" +(day<10?"0"+day:day);
+            this.showDate =  temp.getFullYear() + "年" + mon + "月" + day + "日";
         }
     },
-    mounted(){
-        window.flex(true);
-        Indicator.open();
-        this.getList();
+    beforeRouteEnter(to, from, next) {
+        if( from.path == '/earning/daily/detail' ){
+            to.meta.isBack = true;
+        }
+        next();
     },
     activated(){
-        // 还原滚动位置
-        this.$refs.scroll.scrollTop = this.$store.state.allPageYOffset;
-        this.$store.commit('setAllPageYOffset', 0);
+        window.flex(true);
+        if(!this.$route.meta.isBack) {
+            this.activeTag = 2;
+            this.noMore = false; 
+            this.allLoaded = false;
+            this.mainList = [];
+            this.pageIndex = 1; 
+            this.opt = '';
+            this.getDate();
+            this.getList();
+            // 重置滚动位置
+            this.$store.commit('setAllPageYOffset', 0);
+        }else{
+            // 还原滚动位置
+            this.$refs.scroll.scrollTop = this.$store.state.allPageYOffset;
+        }
+        this.$route.meta.isBack = false;
     },
     beforeRouteLeave(to, from, next) {
         // 记录滚动位置
         this.$store.commit('setAllPageYOffset', this.$refs.scroll.scrollTop);
-        from.meta.keepAlive = false;
         next();
-    }
-    
+    },
 }
 </script>
 
@@ -123,7 +215,7 @@ export default {
     width: 100%;
     display: flex;
     text-align: center;
-    border-top: 0.02rem solid #BCBCBC;
+    border-top: 0.01rem solid #BCBCBC;
     div{
         background:#fff;
         flex: 1;

@@ -96,17 +96,16 @@
     color: #A1A1A1;
     display: flex;
     text-align: center;
-    border-top: 0.02rem solid #BCBCBC;
     div{
         flex: 1;
         &:first-child{
-            border-right: 0.01rem solid #BCBCBC;
+            border-top: 0.01rem solid #BCBCBC;
         }
     }
 }
 // 重写滚动条样式
-.srcoller::-webkit-scrollbar {
-    width: 0.09rem;
+.scroller::-webkit-scrollbar {
+    width: 0.07rem;
 }
 // 详细信息盒子
 .detail_panel{
@@ -143,7 +142,71 @@
     }
 }
 // 列表
-.Lklist {
+.list_head{
+    width: 100%;
+    height: 0.8rem;
+    line-height: 0.5rem;
+    position: absolute;
+    top: 2.76rem;
+    border-bottom: 0.02rem solid #FF9F3F;
+    color: #FF9F3F;
+    display: flex;
+    text-align: center;
+    padding: 0.15rem 0;
+    li{
+        float: left;
+        flex: 1;
+        border-left: 0.02rem solid #FF9F3F;
+        &:first-child{
+            flex: 2;
+            border: 0;
+        }
+    }
+}
+.LKlist{
+    font-size: 0.28rem;
+    .each_li{
+        .highlight{
+            font-weight: 700;
+        }
+        border-bottom: 0.01rem solid #E4E4E4;
+        width: 100%;
+        height: 1rem;
+        line-height: 1rem;
+        ul{
+            display: flex;
+            text-align: center;
+            li{
+                float: left;
+                flex: 1;
+                color: #868686;
+                &:first-child{
+                    flex: 2;
+                    border: 0;
+                }
+                &:nth-child(2){
+                    color:#FF9F3F;
+                }
+                &:nth-child(3){
+                    color:green;
+                }
+            }
+        }
+    }
+    .paymentstyle{
+        ul{
+            li{
+                &:nth-child(2){
+                    color:green;
+                }
+                &:nth-child(3){
+                    color:#FF9F3F;
+                }
+            }
+        }
+    }
+}
+.dailyList{
     ul{
         width: 100%;
         height: 100%;
@@ -204,11 +267,9 @@
     -webkit-overflow-scrolling:touch;
     overflow:auto;
     width: 100%;
-    // overflow-x: hidden;
-    // overflow-y: auto;
     position: absolute;
     bottom: 1rem;
-    top: 2.76rem;
+    top: 3.56rem;
 }
 .all_list{
     -webkit-overflow-scrolling: touch;
@@ -217,7 +278,7 @@
     overflow-x: hidden;
     position: absolute;
     bottom: 1rem;
-    top: 0;
+    top: 1rem;
 }
 // 余额转出盒子
 .deal_panel{
@@ -352,5 +413,27 @@
                 text-align: left;
             }
         }
+    }
+}
+// 日期选择器
+.timePicker{
+    height: 1rem;
+    line-height: 1rem;
+    width: 100%;
+    text-align: center;
+    display: flex;
+    border-bottom: 0.01rem solid #E4E4E4;
+    .side{
+        flex: 1;
+        line-height: 1.4rem;
+        color: #868686;
+        img{
+            position: relative;
+            top: 0.08rem;
+        }
+    }
+    span{
+        flex: 3;
+        font-size: 0.35rem;
     }
 }

@@ -47,7 +47,7 @@
 
         <!-- 底部按钮 -->
         <div class="frame_footer" @click="goBack">
-            <div>返回</div>
+            <div style="border:0">返回</div>
         </div>
     </div>
 </template>
@@ -73,28 +73,24 @@ export default {
         getData(){
             let _this = this;
             this.LKshow.api.account.getInLog({
-                    id:sessionStorage.getItem('itemID'),
-                    success: function(data) {
-                        _this.money = data.money;
-                        _this.balance = data.balance;
-                        _this.incomeTime = data.incomeTime;
-                        _this.incomeOpt = data.incomeOpt;
-                        _this.incomeText = data.incomeText;
-                        _this.remake = data.remake;
-                    },
-                    fail: function(err) {
-                        console.log(err);
-                    }
-                })
+                id:sessionStorage.getItem('itemID'),
+                success: function(data) {
+                    _this.money = data.money;
+                    _this.balance = data.balance;
+                    _this.incomeTime = data.incomeTime;
+                    _this.incomeOpt = data.incomeOpt;
+                    _this.incomeText = data.incomeText;
+                    _this.remake = data.remake;
+                },
+                fail: function(err) {
+                    console.log(err);
+                }
+            })
         }
     },
     mounted(){
         this.getData();
     },
-    beforeRouteLeave(to,from,next){
-        to.meta.isBack = false;
-        next();
-    }
 }
 </script>
 

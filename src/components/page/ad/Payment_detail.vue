@@ -47,7 +47,7 @@
 
         <!-- 底部按钮 -->
         <div class="frame_footer" @click="goBack">
-            <div>返回</div>
+            <div style="border:0">返回</div>
         </div>
     </div>
 </template>

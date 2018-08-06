@@ -3,7 +3,8 @@ import Router from 'vue-router'
 
 Vue.use(Router)
 
-const router = new Router({
+export default new Router({
+  mode: 'history',
   routes: [
     {
       path: '/',
@@ -18,13 +19,9 @@ const router = new Router({
       component: resolve => require(['../components/page/person/Person_work.vue'], resolve)
     },
     {
-      path: '/test',
-      component: resolve => require(['../components/page/Test.vue'], resolve)
-    },
-    {
       path: '/earning/daily',
       component: resolve => require(['../components/page/earning/Daily_earnings.vue'], resolve),
-      meta: { isBack:true },
+      meta: { keepAlive:true, isBack:false },
     },
     {
       path: '/earning/out',
@@ -33,6 +30,7 @@ const router = new Router({
     {
       path: '/earning/daily/all',
       component: resolve => require(['../components/page/earning/Earinings_all.vue'], resolve),
+      meta: { keepAlive:true, isBack:false },
     },
     {
       path: '/earning/daily/detail',
@@ -41,6 +39,7 @@ const router = new Router({
     {
       path: '/ad/daily',
       component: resolve => require(['../components/page/ad/Daily_payment.vue'], resolve),
+      meta: { keepAlive:true, isBack:false },
     },
     {
       path: '/ad/out',
@@ -53,6 +52,7 @@ const router = new Router({
     {
       path: '/ad/daily/all',
       component: resolve => require(['../components/page/ad/Payment_all.vue'], resolve),
+      meta: { keepAlive:true, isBack:false },
     },
     {
       path: '/ad/daily/detail',
@@ -60,11 +60,3 @@ const router = new Router({
     },
   ]
 })
-
-// router.afterEach( (to,from) => {
-//   if( to.path == '/earning/daily'  &&  from.path == '/earning/out'){
-//     window.location.reload();
-//   }
-// })
-
-export default router

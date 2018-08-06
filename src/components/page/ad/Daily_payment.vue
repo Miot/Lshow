@@ -19,7 +19,13 @@
             </div>
         </div>
         <!-- 列表 -->
-        <div class="daily_list" ref="scroll">
+        <ul class="list_head">
+            <li>日期</li>
+            <li>支出</li>
+            <li>收益</li>
+            <li>余额</li>
+        </ul>
+        <div class="daily_list scroller" ref="scroll">
             <LKlist :type="type"></LKlist>
         </div>
         <!-- 底部按钮 -->
@@ -49,6 +55,12 @@ export default {
     methods:{
         // 跳转到全部支出记录页
         goAll(){
+            // 设置真实日期
+            var temp = new Date(new Date());
+            var mon = temp.getMonth() + 1;
+            var day = temp.getDate();
+            var currentDate = temp.getFullYear() + "-" + (mon<10?"0"+mon:mon) + "-" +(day<10?"0"+day:day);
+            sessionStorage.setItem('currentDate',currentDate);
             this.$router.push('/ad/daily/all');
         },
         // 跳转到余额转出页
@@ -75,25 +87,28 @@ export default {
             })
         },
     },
-    mounted(){
-        this.getData();
+    beforeRouteEnter(to, from, next) {
+        if( from.path == '/ad/daily/all' ){
+            to.meta.isBack = true;
+        }
+        next();
     },
     activated(){
-        // 还原滚动位置
-        this.$refs.scroll.scrollTop = this.$store.state.dailyPageYOffset;
-        this.$store.commit('setDailyPageYOffset', 0);
+        if(!this.$route.meta.isBack) {
+            this.getData();
+            // 重置滚动位置
+            this.$store.commit('setDailyPageYOffset', 0);
+        }else{
+            // 还原滚动位置
+            this.$refs.scroll.scrollTop = this.$store.state.dailyPageYOffset;
+        }
+        this.$route.meta.isBack = false;
     },
     beforeRouteLeave(to, from, next) {
         // 记录滚动位置
         this.$store.commit('setDailyPageYOffset', this.$refs.scroll.scrollTop);
-        let _this = this;
-        from.meta.keepAlive = false;
-        if(to.path == '/personcenter'){
-            _this.$destroy();
-            _this.$store.commit('setDailyPageYOffset', 0);
-        }
         next();
-    }
+    },
 }
 </script>
 
@@ -101,5 +116,12 @@ export default {
 .frame_head{
     background: url('../../../../static/img/u3873.png');
     background-size: cover;
+}
+.list_head{
+    color: #059637;
+    border-bottom: 0.01rem solid #059637;
+    li{
+        border-color: #059637;
+    }
 }
 </style>

@@ -19,7 +19,13 @@
             </div>
         </div>
         <!-- 列表 -->
-        <div class="daily_list srcoller" ref="scroll"> 
+        <ul class="list_head">
+            <li>日期</li>
+            <li>收益</li>
+            <li>支出</li>
+            <li>余额</li>
+        </ul>
+        <div class="daily_list scroller" ref="scroll"> 
             <LKlist :type="type"></LKlist>
         </div>
         <!-- 底部按钮 -->
@@ -47,12 +53,19 @@ export default {
         }
     },
     methods:{
-        // 跳转到全部收益记录页
+        // 跳转到当日详细收益页面
         goAll(){
+            // 设置真实日期
+            var temp = new Date(new Date());
+            var mon = temp.getMonth() + 1;
+            var day = temp.getDate();
+            var currentDate = temp.getFullYear() + "-" + (mon<10?"0"+mon:mon) + "-" +(day<10?"0"+day:day);
+            sessionStorage.setItem('currentDate',currentDate);
             this.$router.push('/earning/daily/all');
         },
         // 跳转到转出为广告金页
         goBalanceIn(){
+            // location.href = '/ad/in';
             this.$router.push('/ad/in');
         },
         // 跳转到余额转出页
@@ -72,15 +85,24 @@ export default {
                     console.log('获取总栏数据',err);
                 }
             })
-        }
+        },
     },
-    mounted(){
-        if(this.$route.meta.isBack){
+    beforeRouteEnter(to, from, next) {
+        if( from.path == '/earning/daily/all' ){
+            to.meta.isBack = true;
+        }
+        next();
+    },
+    activated(){
+        if(!this.$route.meta.isBack) {
             this.getData();
+            // 重置滚动位置
+            this.$store.commit('setDailyPageYOffset', 0);
         }else{
             // 还原滚动位置
             this.$refs.scroll.scrollTop = this.$store.state.dailyPageYOffset;
         }
+        this.$route.meta.isBack = false;
     },
     beforeRouteLeave(to, from, next) {
         // 记录滚动位置

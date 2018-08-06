@@ -13,15 +13,27 @@ export default function install (Vue, options){
             account:{
                 // 获取当前登陆的账号信息
                 getAccount:'/api/account/getAccount',
-                // 获取收益账号流水记录（分页）
+                // 获取收益账号流水记录（分页）all
                 getInLogs:'/api/account/getInLogs',
                 // 获取收益账号流水记录详细信息
                 getInLog:'/api/account/getInLog',
-                // 获取广告账号流水记录（分页）
+                // 获取广告账号流水记录（分页）all
                 getOutLogs:'/api/account/getOutLogs',
                 // 获取广告账号流水记录详细信息
                 getOutLog:'/api/account/getOutLog',
+                // 获取收益账号每日记录（分页）daily
+                getInDailyLogs:'/api/account/getInDailyLogs',
+                // 获取广告账号每日记录（分页）daily
+                getOutDailyLogs:'/api/account/getOutDailyLogs',
             },
+            pay:{
+                // 充值接口
+                recharge:'/api/pay/recharge',
+                // 提现接口
+                transferOut:'/api/pay/transferOut',
+                // 转账接口
+                transfer:'/api/pay/transfer',
+            }
         }
     }
   
@@ -88,7 +100,54 @@ export default function install (Vue, options){
                         fail:args.fail
                     });
                 },
+                getInDailyLogs:function(args){
+                    Vue.prototype.request({
+                        url:apiurls.api.account.getInDailyLogs,
+                        method:'GET',
+                        params:args.data,
+                        success:args.success,
+                        fail:args.fail
+                    });
+                },
+                getOutDailyLogs:function(args){
+                    Vue.prototype.request({
+                        url:apiurls.api.account.getOutDailyLogs,
+                        method:'GET',
+                        params:args.data,
+                        success:args.success,
+                        fail:args.fail
+                    });
+                },
             },
+            pay:{
+                recharge:function(args){
+                    Vue.prototype.request({
+                        url:apiurls.api.pay.recharge,
+                        method:'GET',
+                        params:{totalFee:args.totalFee},
+                        success:args.success,
+                        fail:args.fail
+                    });
+                },
+                transferOut:function(args){
+                    Vue.prototype.request({
+                        url:apiurls.api.pay.transferOut,
+                        method:'GET',
+                        params:{totalFee:args.totalFee},
+                        success:args.success,
+                        fail:args.fail
+                    });
+                },
+                transfer:function(args){
+                    Vue.prototype.request({
+                        url:apiurls.api.pay.transfer,
+                        method:'GET',
+                        params:{totalFee:args.totalFee},
+                        success:args.success,
+                        fail:args.fail
+                    });
+                },
+            }
         },
     };
 

@@ -3,7 +3,7 @@
         <!-- 顶部信息 -->
         <div class="frame_head">
             <div class="head_top">
-                <img src="../../../../static/img/u3733.png" class="left" @click="test()">
+                <img src="../../../../static/img/u3733.png" class="left">
             </div>
             <div class="head_msg">
                 <p>广告账户余额仅用于邻客秀平台投放广告</p>
@@ -101,12 +101,13 @@ export default {
         }
     },
     methods:{
-        test(){
-            console.log(this.input);
-        },
         // 确认转入按钮
         sureTransfer(){
             this.dealt = true;
+            // 还没有做必读设置
+            this.test();
+
+
         },
         // 完成按钮
         finishDeal(){
@@ -142,6 +143,19 @@ export default {
             }else{
                 this.input = '';
             }
+        },
+
+        // 
+        test(){
+            this.LKshow.api.pay.recharge({
+                totalFee:10.00,
+                success:function(data){
+                    console.log(data);
+                },
+                fail:function(err){
+                    console.log(err);
+                },
+            })
         }
     },
     mounted(){
